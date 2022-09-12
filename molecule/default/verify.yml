@@ -1,0 +1,13 @@
+---
+- name: Verify
+  hosts: all
+  vars_files:
+    - ../../defaults/main.yml
+  tasks:
+    - name: Check vault4summon version
+      ansible.builtin.command: vault4summon --version
+      register: output
+    - name: Assert that vault4summon is installed
+      ansible.builtin.assert:
+        that:
+          - "'{{ vault4summon_version }}' in output.stdout"

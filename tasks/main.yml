@@ -1,0 +1,60 @@
+---
+- name: Ensure vault4summon folder exists
+  ansible.builtin.file:
+    path: "{{ vault4summon_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  become: true
+
+- name: Ensure summon lib folder exists
+  ansible.builtin.file:
+    path: "{{ summon_lib_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  become: true
+
+- name: Download vault4summon archive
+  ansible.builtin.get_url:
+    url: "{{ vault4summon_download_url }}"
+    dest: /tmp/vault4summon.tar.gz
+    mode: 0655
+    checksum: "{{ vault4summon_checksum }}"
+  changed_when: false
+
+- name: Extract vault4summon archive
+  ansible.builtin.unarchive:
+    src: /tmp/vault4summon.tar.gz
+    dest: "{{ vault4summon_path }}"
+    creates: "{{ vault4summon_path }}/vault4summon"
+    owner: root
+    group: root
+    remote_src: yes
+  become: true
+
+- name: Remove vault4summon archive
+  ansible.builtin.file:
+    path: /tmp/vault4summon.tar.gz
+    state: absent
+  changed_when: false
+
+- name: Create vault4summon symlink
+  ansible.builtin.file:
+    src: "{{ vault4summon_path }}/vault4summon"
+    dest: "{{ vault4summon_bin }}"
+    owner: root
+    group: root
+    state: link
+  become: true
+
+- name: Create summon provider symlink
+  ansible.builtin.file:
+    src: "{{ vault4summon_path }}/vault4summon"
+    dest: "{{ summon_lib_path }}/vault4summon"
+    owner: root
+    group: root
+    state: link
+  become: true
