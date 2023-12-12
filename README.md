@@ -6,7 +6,7 @@ Ansible role which installs [vault4summon](https://github.com/bdhave/vault4summo
 Requirements
 ------------
 
-None.
+- The `unzip` command, which can be provided by the `ecgalaxy.common_packages` role.
 
 Role Variables
 --------------
@@ -16,14 +16,17 @@ See defaults/main.yml.
 Dependencies
 ------------
 
-* ecgalaxy.common_packages
-* optional: ecgalaxy.summon
+- optional: ecgalaxy.common_packages
+- optional: ecgalaxy.summon
 
 Example Playbook
 ----------------
 
     - hosts: all
       roles:
+        - ecgalaxy.bootstrap
+        - ecgalaxy.common_packages
+        - ecgalaxy.summon
         - ecgalaxy.vault4summon
 
 License

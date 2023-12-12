@@ -1,6 +1,9 @@
 ---
 - name: Converge
   hosts: all
+  roles:
+    - role: ecgalaxy.bootstrap
+    - role: ecgalaxy.common_packages
   tasks:
     - name: Include vault4summon
       ansible.builtin.include_role:
