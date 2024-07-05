@@ -5,7 +5,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: 'u=rwx,go=rx'
   become: true
 
 - name: Ensure summon lib folder exists
@@ -14,14 +14,14 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: 'u=rwx,go=rx'
   become: true
 
 - name: Download vault4summon archive
   ansible.builtin.get_url:
     url: "{{ vault4summon_download_url }}"
     dest: /tmp/vault4summon.tar.gz
-    mode: 0655
+    mode: 'u=rw,go=r'
     checksum: "{{ vault4summon_checksum }}"
   changed_when: false
 
@@ -32,7 +32,7 @@
     creates: "{{ vault4summon_path }}/vault4summon"
     owner: root
     group: root
-    remote_src: yes
+    remote_src: true
   become: true
 
 - name: Remove vault4summon archive

@@ -1,6 +1,6 @@
 ---
 vault4summon_version: 1.0.0
-vault4summon_download_url: "https://github.com/bdhave/vault4summon/releases/download/v{{ vault4summon_version }}/vault4summon-{{ vault4summon_version }}-linux-amd64.tar.gz"
+vault4summon_download_url: "https://github.com/bdhave/vault4summon/releases/download/v{{ vault4summon_version }}/vault4summon-{{ vault4summon_version }}-linux-amd64.tar.gz" # noqa yaml[line-length]
 vault4summon_checksum: "sha256:d3d45c767d72ee8c149137817ddb473b7e10c5b717532801dc3556ebe1a59e7b"
 vault4summon_path: "/opt/vault4summon/{{ vault4summon_version }}"
 vault4summon_bin: "/usr/local/bin/vault4summon"
